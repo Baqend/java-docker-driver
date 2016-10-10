@@ -104,7 +104,7 @@ public class DockerClientConfig implements Serializable {
         if (dockerTlsVerify) {
             if (StringUtils.isEmpty(dockerCertPath)) {
                 throw new DockerClientException(
-                        "Enabled TLS verification (DOCKER_TLS_VERIFY=1) but certifate path (DOCKER_CERT_PATH) is not defined.");
+                        "Enabled TLS verification (DOCKER_TLS_VERIFY=1) but certificate path (DOCKER_CERT_PATH) is not defined.");
             } else {
                 File certPath = new File(dockerCertPath);
 
