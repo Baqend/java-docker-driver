@@ -908,22 +908,6 @@ public class CreateContainerCmdIT extends CmdIT {
         assertThat(inspectContainerResponse.getHostConfig().getLogConfig().getLoggingType(), equalTo(LogConfig.JSON_FILE));
     }
 
-    @Test
-    public void createContainerWithCustomLogConfig() throws DockerException {
-
-        LogConfig logConfig = new LogConfig(new LogConfig.CustomLoggingType("none"), null);
-        CreateContainerResponse container = dockerRule.getClient().createContainerCmd(DEFAULT_IMAGE).withLogConfig(logConfig).exec();
-
-        LOG.info("Created container {}", container.toString());
-
-        assertThat(container.getId(), not(isEmptyString()));
-
-        InspectContainerResponse inspectContainerResponse = dockerRule.getClient().inspectContainerCmd(container.getId()).exec();
-
-        // null becomes empty string
-        assertThat(inspectContainerResponse.getHostConfig().getLogConfig().type.getType(), is(logConfig.type.getType()));
-    }
-
     /**
      * https://github.com/calavera/docker/blob/3781cde61ff10b1d9114ae5b4c5c1d1b2c20a1ee/integration-cli/docker_cli_run_unix_test.go#L319-L333
      */
